@@ -1,0 +1,27 @@
+{
+  "name": "guahanweb-app-setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "guahanweb-app-setup": "./index.js"
+  },
+  "scripts": {
+    "generate": "node index.js",
+    "generate:node-app": "node index.js node-app"
+  },
+  "keywords": [],
+  "author": "",
+  "preferGlobal": true,
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.2.0",
+    "inquirer": "^8.2.4",
+    "minimist": "^1.2.6",
+    "plop": "^3.1.0"
+  },
+  "generators": [
+    "node-app"
+  ]
+}
