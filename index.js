@@ -17,33 +17,19 @@ main();
 function main() {
     const program = new Command();
     program
-        .argument('[generator]', 'name of generator to initialize')
-        .action(async (generator, opts) => {
-            if (!generator) {
-                // prompt for which to initialize
-                const answers = await inquirer.prompt([
-                    {
-                        type: 'rawlist',
-                        name: 'generator',
-                        message: 'Select a generator to initialize',
-                        choices: generators
-                    }
-                ]);
-                generator = answers.generator;
-            }
-
-            // bootstrap the project using plopfiles
-            await initialize(generator, opts);
-        })
+        .option('--cwd <cwd>', 'current working directory')
+        .option('--preload <preload>', 'file(s) to preload')
+        .option('--completion <completion>', 'plop completion argument')
+        .action((opts) => initialize(opts))
         .parse(process.argv);
 }
 
-function initialize(generator, argv) {
+function initialize(opts) {
     Plop.prepare({
-        cwd: argv.cwd,
-        configPath: path.join(__dirname, `generators/${generator}.plopfile.js`),
-        preload: argv.preload || [],
-        completion: argv.completion,
+        cwd: opts.cwd,
+        configPath: path.join(__dirname, 'plopfile.js'),
+        preload: opts.preload || [],
+        completion: opts.completion,
     }, env =>
         Plop.execute(env, (env) => {
             const options = {

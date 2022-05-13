@@ -1,0 +1,49 @@
+[
+    {
+        "id": "aws",
+        "name": "AWS SDK",
+        "server": true,
+        "client": false,
+        "isDefault": false
+    },
+    {
+        "id": "cli",
+        "name": "Command line tools",
+        "server": true,
+        "client": false,
+        "isDefault": false,
+
+        "dependencies": {
+            "commander": "^9.2.0"
+        }
+    },
+    {
+        "id": "express",
+        "name": "Express server",
+        "server": true,
+        "client": false,
+        "isDefault": true,
+
+        "dependencies": {
+            "body-parser": "^1.20.0",
+            "express": "^4.17.3"
+        }
+    },
+    {
+        "id": "redis",
+        "name": "Redis integration",
+        "server": true,
+        "client": false,
+        "isDefault": false,
+        "dependencies": {
+            "redis": "^4.0.6"
+        },
+        "devDependencies": {
+            "@types/redis-mock": "^0.17.1",
+            "redis-mock": "^0.56.3"
+        },
+        "scripts": {
+            "start:redis": "docker run -p 6379:6379 -v /tmp/redis:/data -d redis redis-server --save 60 1 --loglevel warning"
+        }
+    }
+]
